@@ -5,6 +5,7 @@ This directory contains small scripts that demonstrate different agent patterns.
 - `agents-as-tools.ts` – Orchestrate translator agents using them as tools. This example routes every model call through Vercel AI Gateway with `AiGatewayProvider` from `examples/model-providers/ai-gateway.ts`, so it requires environment variables `AI_GATEWAY_API_KEY` and `AI_GATEWAY_MODEL` (a gateway model slug such as `openai/gpt-5.4`) instead of `OPENAI_API_KEY`.
   ```bash
   pnpm examples:agents-as-tools
+  Translate "Hello, how are you?" into French.
   ```
 - `agents-as-tools-structured.ts` – Use structured tool input with `Agent.asTool()`.
   ```bash
