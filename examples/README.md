@@ -1,6 +1,7 @@
 ### 提交报错问题
 
   ```bash
+  git add examples/README.md
   git -c core.hooksPath=/dev/null commit -m "学习 agents-as-tools"
   ```
 
