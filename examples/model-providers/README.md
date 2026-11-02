@@ -14,6 +14,14 @@ This directory contains small scripts showing how to integrate custom model prov
   ```bash
   pnpm -F model-providers start:custom-example-provider
   ```
+- `ai-gateway.ts` – Reusable `AiGatewayProvider` that routes model calls through Vercel AI Gateway instead of calling OpenAI directly. It wraps `OpenAIProvider` with the gateway's OpenAI-compatible Chat Completions endpoint (`https://ai-gateway.vercel.sh/v1`), so model names must be gateway slugs such as `openai/gpt-5.4`. This file exports a class rather than running a scenario; see `examples/agent-patterns/agents-as-tools.ts` for a caller. Requires environment variables `AI_GATEWAY_API_KEY` and `AI_GATEWAY_MODEL`, or an explicit `apiKey` and `model` in the constructor options.
+  ```ts
+  import { Runner, setDefaultModelProvider } from '@openai/agents';
+  import { AiGatewayProvider } from '../model-providers/ai-gateway.ts';
+
+  const gatewayProvider = new AiGatewayProvider();
+  setDefaultModelProvider(gatewayProvider); // or new Runner({ modelProvider: gatewayProvider })
+  ```
 
 ## Runtime requirements
 

@@ -157,3 +157,5 @@ bundled/
 
 .pnpm-store/
 .vercel/
+/.idea/
+**/.idea/
