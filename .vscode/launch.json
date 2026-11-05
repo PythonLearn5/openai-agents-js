@@ -7,6 +7,30 @@
       "name": "Docs development server",
       "request": "launch",
       "type": "node-terminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug example: agents-as-tools",
+      "cwd": "${workspaceFolder}/examples/agent-patterns",
+      "program": "${workspaceFolder}/examples/agent-patterns/agents-as-tools.ts",
+      // 示例用 readline 从 stdin 提问，必须用集成终端；内部调试控制台会让 rl.question 永久挂起。
+      "console": "integratedTerminal",
+      // 调试进程不继承 IDE 终端里 $env: 设置的变量，网关密钥改从 gitignored 的根 .env 读取。
+      "envFile": "${workspaceFolder}/.env",
+      // 保留 dist source map 的步进能力；想屏蔽 SDK 内部时再加 "packages/**/dist/**"。
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug example: agents-as-tools-structured",
+      "cwd": "${workspaceFolder}/examples/agent-patterns",
+      "program": "${workspaceFolder}/examples/agent-patterns/agents-as-tools-structured.ts",
+      // 这个示例没有交互输入，改成 internalConsole 也能跑；保持 integratedTerminal 便于加提问。
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }
