@@ -72,11 +72,12 @@ const orchestrator = new Agent({
 async function main() {
   const query = 'Translate "Hola" from Spanish to French.';
 
-  // 对照组：直接运行 translator 本身，看它作为普通 Agent 的输出。
+  // 对照组：直接运行 translator，finalOutput 是 translator 自己的输出。
   const response1 = await run(translator, query);
   console.log('Translator agent direct run:', response1.finalOutput);
 
-  // 实验组：运行编排者，由它把同一句请求作为结构化工具参数转交给 translator。
+  // 实验组：运行 orchestrator，它把请求拆成结构化参数调用 translate_text 工具，
+  // translator 的输出只是工具返回值；finalOutput 是 orchestrator 收到结果后的转述。
   const response2 = await run(orchestrator, query);
   console.log('Translator agent as tool:', response2.finalOutput);
 }
