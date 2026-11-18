@@ -24,6 +24,17 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Debug example: agents-as-tools-streaming",
+      "cwd": "${workspaceFolder}/examples/agent-patterns",
+      "program": "${workspaceFolder}/examples/agent-patterns/agents-as-tools-streaming.ts",
+      // 这个示例没有交互输入，改成 internalConsole 也能跑；保持 integratedTerminal 便于加提问。
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Debug example: agents-as-tools-structured",
       "cwd": "${workspaceFolder}/examples/agent-patterns",
       "program": "${workspaceFolder}/examples/agent-patterns/agents-as-tools-structured.ts",
