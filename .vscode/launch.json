@@ -42,6 +42,27 @@
       "console": "integratedTerminal",
       "envFile": "${workspaceFolder}/.env",
       "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug example: deterministic",
+      "cwd": "${workspaceFolder}/examples/agent-patterns",
+      "program": "${workspaceFolder}/examples/agent-patterns/deterministic.ts",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug example: forcing-tool-use",
+      "cwd": "${workspaceFolder}/examples/agent-patterns",
+      "program": "${workspaceFolder}/examples/agent-patterns/forcing-tool-use.ts",
+      "args": ["-t", "custom"],
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }

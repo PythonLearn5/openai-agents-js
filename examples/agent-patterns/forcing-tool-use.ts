@@ -99,7 +99,15 @@ async function main(
   });
 
   const result = await run(agent, "What's the weather in Tokyo?");
-  console.log(result.finalOutput);
+
+  // 打印每轮模型调用的原始响应，用 default 时应看到 2 轮，first_tool 时只有 1 轮。
+  console.log(`\n模型调用次数: ${result.rawResponses.length}`);
+  result.rawResponses.forEach((resp, i) => {
+    console.log(`\n--- 第 ${i + 1} 轮模型输出 ---`);
+    console.log(JSON.stringify(resp, null, 2));
+  });
+
+  console.log(`\n### finalOutput:\n${result.finalOutput}`);
 }
 
 // CLI argument parsing
@@ -134,3 +142,19 @@ main(toolUseBehavior).catch((error) => {
   console.error(error);
   process.exit(1);
 });
+
+/**
+ * @description: 强制工具使用
+ *
+ * 命令行用法：node forcing-tool-use.ts -t <behavior>
+ *   -t / --tool-use-behavior  二选一，参数值见下表；不传时默认 default。
+ *
+ * 三种行为对比：
+ *   default    工具结果回灌模型再生成一轮，finalOutput 来自模型第 2 轮输出。
+ *   first_tool 第一个工具输出直接作为最终结果，省一次模型调用；
+ *              非字符串返回值会被原样序列化成 JSON 文本。
+ *   custom     自定义函数收尾，由代码决定停不停、最终文本怎么写。
+ *
+ * launch.json 调试：在对应配置里加 "args": ["-t", "default"]，
+ * 切换行为时改第二个元素即可（first_tool / custom）。
+ */
