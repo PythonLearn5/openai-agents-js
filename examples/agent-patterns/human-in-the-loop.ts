@@ -144,3 +144,48 @@ main().catch((error) => {
   console.error(error);
   process.exit(1);
 });
+
+/**
+ * 运行场景：用户问「San Francisco 和 Oakland 的天气和温度」，
+ * 固定提问同时命中两条审批规则，演示完整的暂停 → 审批 → 恢复流程。
+ *
+ * ===== 批准流程（设 AUTO_APPROVE_HITL=1 时全程自动批准）=====
+ *
+ * 第 1 次 run()
+ * │  模型决定调用两个工具：ask_weather_agent("San Francisco...") 和 get_temperature("Oakland")
+ * │  两者都触发 needsApproval → 运行暂停，result.interruptions 包含 2 个待审批项
+ * │
+ * ├─ 写盘：序列化 RunState 到 result.json（演示跨进程恢复）
+ * ├─ 读盘：RunState.fromString 重建状态
+ * ├─ 审批 ask_weather_agent：批准 → state.approve()
+ * ├─ 审批 get_temperature("Oakland")：批准 → state.approve()
+ * │
+ * 第 2 次 run(agent, state)  ← 恢复
+ * │  ask_weather_agent 执行：SDK 运行 weatherAgent → get_weather("San Francisco") → "sunny"
+ * │  get_temperature("Oakland") 执行：返回 "20° Celsius"
+ * │  两项都完成后，模型拿到结果生成最终回复
+ * │
+ * └─ 输出 finalOutput（如：San Francisco 晴天，Oakland 20°C）
+ *
+ * ===== 拒绝流程（交互式输入 n）=====
+ *
+ * 第 1 次 run()
+ * │  同上，两个工具触发审批暂停
+ * │
+ * ├─ 审批 ask_weather_agent：拒绝 → state.reject()
+ * │  运行时不抛错，而是把拒绝说明作为该工具的输出回给模型
+ * ├─ 审批 get_temperature("Oakland")：拒绝 → state.reject()
+ * │
+ * 第 2 次 run(agent, state)  ← 恢复
+ * │  两个工具都不执行 execute，模型收到的工具结果是拒绝说明文本
+ * │  模型根据拒绝结果决定如何回复（通常会说明无法提供该信息）
+ * │
+ * └─ 输出 finalOutput（如：我无法获取 San Francisco 和 Oakland 的天气信息）
+ *
+ * 也可以混合：批准一个、拒绝另一个，模型会根据实际拿到的部分结果组织回复。
+ *
+ * 审批粒度：
+ *   get_temperature  按城市名判断（Oakland 要审批，其他城市不要）
+ *   ask_weather_agent 按输入文本判断（含 San Francisco 要审批）
+ *   get_weather       无 needsApproval，永远不审批
+ */

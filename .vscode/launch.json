@@ -63,6 +63,16 @@
       "console": "integratedTerminal",
       "envFile": "${workspaceFolder}/.env",
       "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug example: human-in-the-loop",
+      "cwd": "${workspaceFolder}/examples/agent-patterns",
+      "program": "${workspaceFolder}/examples/agent-patterns/human-in-the-loop.ts",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }

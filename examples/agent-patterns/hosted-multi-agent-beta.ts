@@ -38,6 +38,7 @@ const records = {
 // 本地函数工具。根 Agent 只声明它一次，服务端派生的每个子 Agent 都能请求调用它。
 const getProposal = tool({
   name: 'get_proposal',
+  // 返回提案的确定性详情。
   description: 'Return deterministic details for a proposal.',
   parameters: z.object({ proposal: z.enum(['alpha', 'beta']) }),
   execute: async ({ proposal }, _context, details) => {
@@ -109,6 +110,8 @@ async function main() {
       name: 'Hosted proposal coordinator',
       model,
       tools: [getProposal],
+      // 创建两个子智能体。让其中一个检查方案 Alpha，另一个检查方案 Beta。每个子智能体都必须针对其被分配的方案调用 `get_proposal`。
+      // 待两者均完成后，对比它们的持续时间和风险，并在最终的汇总回答中给出简洁的结论。
       instructions:
         'Create two subagents. Ask one to inspect proposal alpha and the other to inspect proposal beta. Each subagent must call get_proposal for its assigned proposal. Wait for both, then compare their duration and risk in one concise root final answer.',
     });
