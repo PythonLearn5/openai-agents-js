@@ -143,6 +143,17 @@
       "console": "integratedTerminal",
       "envFile": "${workspaceFolder}/.env",
       "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug example: sandbox-basic",
+      "cwd": "${workspaceFolder}/examples/sandbox",
+      "program": "${workspaceFolder}/examples/sandbox/basic.ts",
+      "args": ["--docker"],
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }
