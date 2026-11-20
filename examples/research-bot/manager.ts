@@ -23,8 +23,12 @@ export class ResearchManager {
         `[trace_id] View trace: https://platform.openai.com/logs/trace?trace_id=${trace.traceId}`,
       );
       console.log(`[starting] Starting research...`);
+      // 规划搜索计划
       const searchPlan = await this._planSearches(query);
+      console.log('[searching] Searching...');
+      // 执行搜索
       const searchResults = await this._performSearches(searchPlan);
+      // 写报告
       const report = await this._writeReport(query, searchResults);
 
       const finalReport = `Report summary\n\n${report.shortSummary}`;

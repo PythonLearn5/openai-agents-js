@@ -1,21 +1,21 @@
-# Research Bot
+# Research Bot（研究机器人）
 
-This example shows how to orchestrate several agents to produce a detailed research report.
+本示例展示如何编排多个 Agent 来生成一份详细的研究报告。
 
-## Files
+## 文件
 
-- **main.ts** – CLI entrypoint that asks for a query and runs the workflow using `ResearchManager`.
-- **manager.ts** – Coordinates the planning, web searching and report writing stages.
-- **agents.ts** – Contains the agents: a planner that suggests search terms, a search agent that summarizes results and a writer that generates the final report.
+- **main.ts** – CLI 入口，询问查询内容并通过 `ResearchManager` 运行工作流。
+- **manager.ts** – 协调规划、网页搜索和报告撰写三个阶段。
+- **agents.ts** – 包含三个 Agent：负责生成搜索关键词的规划 Agent、负责总结搜索结果的搜索 Agent，以及负责撰写最终报告的写作 Agent。
 
-## Usage
+## 用法
 
-From the repository root run:
+在仓库根目录运行：
 
 ```bash
 pnpm examples:research-bot
 ```
 
-## Runtime requirements
+## 运行环境要求
 
-Use Node.js 22.18 or later within the 22.x line, Node.js 24.x, or Node.js 26 or later. The following commands execute TypeScript directly with Node.js: `start`.
+使用 Node.js 22.18 或更高版本（限 22.x 系列）、Node.js 24.x，或 Node.js 26 及以上版本。以下命令通过 Node.js 直接执行 TypeScript：`start`。

@@ -133,6 +133,16 @@
       "console": "integratedTerminal",
       "envFile": "${workspaceFolder}/.env",
       "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug example: research-bot",
+      "cwd": "${workspaceFolder}/examples/research-bot",
+      "program": "${workspaceFolder}/examples/research-bot/main.ts",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }
