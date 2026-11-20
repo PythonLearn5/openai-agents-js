@@ -1,3 +1,6 @@
+// memory.ts 的对照版：同样两轮问答 + 两个工具，但会话换成 OpenAIConversationsSession——
+// 对话历史存在 OpenAI Conversations API 服务端，本地只持有 conversationId，不再每轮把全量历史塞进请求。
+// 首次 run 时自动创建 conversation，之后每轮用同一个 conversationId 续接。需要 OPENAI_API_KEY。
 import {
   Agent,
   OpenAIConversationsSession,
@@ -29,6 +32,7 @@ async function main() {
       tools: [lookupCustomerProfile, fetchImageData],
     });
 
+    // 历史存服务端：第二轮只需传新问题，session 内部用 conversationId 让模型看到上一轮的上下文。
     const session = new OpenAIConversationsSession();
     let result = await run(
       agent,
@@ -37,6 +41,7 @@ async function main() {
     );
     console.log(result.finalOutput); // e.g., Brazil
 
+    // 「that country」指代上一轮的巴西——靠服务端 conversation 历史解析，不是本地拼接。
     result = await run(agent, 'What is the capital of that country?', {
       session,
     });
@@ -53,6 +58,7 @@ async function mainStream() {
       tools: [lookupCustomerProfile, fetchImageData],
     });
 
+    // 流式版机制相同：session 只携带 conversationId；下方两种事件遍历只是取文本的写法不同。
     const session = new OpenAIConversationsSession();
     let result = await run(
       agent,

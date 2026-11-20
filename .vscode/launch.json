@@ -113,6 +113,26 @@
       "console": "integratedTerminal",
       "envFile": "${workspaceFolder}/.env",
       "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug example: memory",
+      "cwd": "${workspaceFolder}/examples/memory",
+      "program": "${workspaceFolder}/examples/memory/memory.ts",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug example: memory-hitl",
+      "cwd": "${workspaceFolder}/examples/memory",
+      "program": "${workspaceFolder}/examples/memory/memory-hitl.ts",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }
