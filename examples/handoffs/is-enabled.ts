@@ -3,6 +3,7 @@ import { createInterface } from 'node:readline/promises';
 
 const introduction =
   `Handoffs with Conditional Enabling\n\n` +
+  // 系统会根据用户偏好，将对话分派给语言专家。
   'This routes conversations to language specialists based on user preferences.\n';
 
 type LanguagePreference = 'spanish_only' | 'french_spanish' | 'european';
@@ -75,6 +76,9 @@ const triageAgent = new Agent<AppContext>({
     'When a specialist handoff is available you immediately transfer the conversation.',
     'If no specialist is available you answer in English and explain the limitation.',
   ].join(' '),
+  // '您负责对多语言对话进行分流。',
+  // '若有专家可供对接，您应立即将对话转交给对方。',
+  // '若无专家可用，您则需用英语进行回复，并说明当前的局限情况。'
   handoffs: [spanishHandoff, frenchHandoff, italianHandoff],
 });
 

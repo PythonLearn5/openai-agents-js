@@ -22,6 +22,7 @@ async function main() {
         name: 'MCP Assistant',
         instructions:
           'Use the tools to read the filesystem and answer questions based on those files. If you are unable to find any files, you can say so instead of assuming they exist.',
+        // 使用工具读取文件系统，并根据这些文件回答问题。如果找不到任何文件，请直接说明，不必假设它们存在。
         mcpServers: [mcpServer],
       });
       // List the files it can read

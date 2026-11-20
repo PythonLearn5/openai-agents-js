@@ -36,6 +36,7 @@ function spanishHandoffMessageFilter(handoffMessageData: HandoffInputData) {
 
 const firstAgent = new Agent({
   name: 'First Assistant',
+  // 务必极其简练。
   instructions: 'Be extremely concise.',
   tools: [randomNumberTool],
 });

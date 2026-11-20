@@ -73,6 +73,46 @@
       "console": "integratedTerminal",
       "envFile": "${workspaceFolder}/.env",
       "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug example: agent-lifecycle-example",
+      "cwd": "${workspaceFolder}/examples/basic",
+      "program": "${workspaceFolder}/examples/basic/agent-lifecycle-example.ts",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug example: handoffs-index",
+      "cwd": "${workspaceFolder}/examples/handoffs",
+      "program": "${workspaceFolder}/examples/handoffs/index.ts",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug example: handoffs-is-enabled",
+      "cwd": "${workspaceFolder}/examples/handoffs",
+      "program": "${workspaceFolder}/examples/handoffs/is-enabled.ts",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug example: filesystem-example",
+      "cwd": "${workspaceFolder}/examples/mcp",
+      "program": "${workspaceFolder}/examples/mcp/filesystem-example.ts",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }

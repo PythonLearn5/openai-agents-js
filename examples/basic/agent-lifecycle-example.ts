@@ -28,6 +28,7 @@ const multiplyAgent = new Agent({
 
 const startAgent = new Agent({
   name: 'Start Agent',
+  // 生成一个随机数。如果是偶数，则停止；如果是奇数，则将其交给乘法代理。
   instructions:
     "Generate a random number. If it's even, stop. If it's odd, hand off to the multiply agent.",
   tools: [randomNumberTool],
