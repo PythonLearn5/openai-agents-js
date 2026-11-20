@@ -1,5 +1,6 @@
 import type { TransportEvent } from '@openai/agents-realtime';
 
+// 把 transport 事件渲染成可折叠的 <details>，方便在页面上查看原始 Realtime API 事件流。
 export function log(event: TransportEvent) {
   const log = document.querySelector<HTMLDivElement>('#eventLog')!;
   const details = document.createElement('details');
@@ -20,6 +21,7 @@ export const connectButton =
   document.querySelector<HTMLButtonElement>('#connectButton')!;
 
 type ButtonState = 'muted' | 'unmuted' | 'disconnected';
+// 按连接/静音状态切换三个按钮的显隐和文案。
 export function setButtonStates(newState: ButtonState) {
   if (newState === 'muted') {
     disconnectButton.style.display = 'block';
